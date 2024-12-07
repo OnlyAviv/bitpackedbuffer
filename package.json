@@ -1,8 +1,8 @@
 {
   "name": "bitpacked",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "A Bit-Packed Buffer",
-  "main": "src/Buffer.js",
+  "main": "src/buffer.js",
   "directories": {
     "test": "test"
   },
@@ -11,6 +11,7 @@
     "format": "prettier --check \"**/*.{js,jsx,ts,tsx,md,json,yaml,yml}\"",
     "format:fix": "prettier --write \"**/*.{js,jsx,ts,tsx,md,json,yaml,yml}\""
   },
+  "types": "./src/buffer.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/RedYetiDev/bitpackedbuffer.git"

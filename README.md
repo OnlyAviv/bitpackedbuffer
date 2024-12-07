@@ -3,16 +3,20 @@
 [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![npm version](https://badge.fury.io/js/bitpacked.svg)](https://www.npmjs.com/package/bitpacked)
 
-A zero-dependency JavaScript library for efficient bit-level data manipulation, supporting both little-endian and big-endian byte orders.
+A high-performance JavaScript library for bit-level data manipulation with zero dependencies. Perfect for binary protocols, file formats, and low-level data operations.
 
-## Why BitPackedBuffer?
+## Overview
 
-- 🚀 **Lightweight**: Zero dependencies, minimal overhead
-- 🔧 **Flexible**: Support for both little-endian and big-endian byte orders
-- 💪 **Powerful**: Read and write at both bit and byte levels
-- 🎯 **Precise**: Efficient bit-level operations with position control
-- 🔄 **Chainable**: Clean, fluent API for consecutive operations
-- 📦 **Modern**: Full ES Module support
+BitPackedBuffer provides precise control over bit-level operations in JavaScript, supporting both big-endian and little-endian byte orders. Whether you're implementing a binary protocol, working with compressed data, or handling custom file formats, BitPackedBuffer offers a clean, chainable API for all your bit manipulation needs.
+
+### Key Features
+
+- 🚀 Zero dependencies, minimal overhead
+- 💫 Bit-level precision (1-32 bits)
+- 🔄 Big and little-endian support
+- 📦 Modern ES Module design
+- ⚡ Efficient memory usage
+- 🛡️ Comprehensive error checking
 
 ## Installation
 
@@ -20,84 +24,40 @@ A zero-dependency JavaScript library for efficient bit-level data manipulation, 
 npm install bitpacked
 ```
 
-## Quick Start
+## Quick Examples
 
+### Basic Usage
+
+<!-- prettier-ignore -->
 ```javascript
-import { BitPackedBuffer } from "bitpacked";
+import { BitPackedBuffer } from 'bitpacked';
 
-// Create a buffer and write some data
+// Write mixed-width values
 const buffer = new BitPackedBuffer()
-  .writeBits(5, 3) // Write value 5 using 3 bits
-  .writeBits(10, 4) // Write value 10 using 4 bits
+  .write.bits(5, 3) // Write value 5 using 3 bits
+  .write.bits(10, 4) // Write value 10 using 4 bits
+  .write.string('Hi') // Write a string
   .alignToByte(); // Align to byte boundary
 
-// Read the data back
+// Read them back
 buffer.seek(0);
-console.log(buffer.readBits(3)); // → 5
-console.log(buffer.readBits(4)); // → 10
+console.log(buffer.read.bits(3)); // → 5
+console.log(buffer.read.bits(4)); // → 10
+console.log(buffer.read.string(2)); // → "Hi"
 ```
 
-## Key Features
-
-### Reading Operations
+### Working with Endianness
 
 ```javascript
-const buffer = new BitPackedBuffer(existingData);
-
-// Read bits without moving position
-const peekedValue = buffer.peek(4);
-
-// Read and advance position
-const value = buffer.readBits(3);
-const bytes = buffer.readBytes(2);
-```
-
-### Writing Operations
-
-```javascript
-const buffer = new BitPackedBuffer();
-
-// Chain multiple writes
-buffer
-  .writeBits(7, 4) // Write 7 using 4 bits
-  .writeBytes([1, 2]) // Write byte array
-  .alignToByte(); // Align to byte boundary
-```
-
-### Position Management
-
-```javascript
-buffer
-  .mark("start") // Mark current position
-  .writeBits(12, 5) // Write some bits
-  .reset("start"); // Return to marked position
-```
-
-## Advanced Usage
-
-### Working with Different Endianness
-
-```javascript
-// Create little-endian buffer
+// Create a little-endian buffer
 const buffer = new BitPackedBuffer(null, "little");
 
-// Write and read multi-byte values
-buffer.writeBits(1000, 16);
+// Write a 16-bit value
+buffer.write.bits(1000, 16);
+
+// Read it back
 buffer.seek(0);
-console.log(buffer.readBits(16)); // → 1000
-```
-
-### Buffer Management
-
-```javascript
-// Get underlying buffer
-const rawBuffer = buffer.getBuffer();
-
-// Check if all data has been read
-const isComplete = buffer.isComplete();
-
-// Clear buffer state
-buffer.clear();
+console.log(buffer.read.bits(16)); // → 1000
 ```
 
 ## API Reference
@@ -111,43 +71,94 @@ new BitPackedBuffer(
 )
 ```
 
-By default, a `BitPackedBuffer` is Big-Endian.
+### Reading Operations
 
-### Core Methods
+| Method                | Description                 | Example                  |
+| --------------------- | --------------------------- | ------------------------ |
+| `read.bits(count)`    | Read 1-32 bits              | `buffer.read.bits(5)`    |
+| `read.bytes(count)`   | Read multiple bytes         | `buffer.read.bytes(4)`   |
+| `read.string(length)` | Read fixed-length string    | `buffer.read.string(10)` |
+| `read.cString()`      | Read null-terminated string | `buffer.read.cString()`  |
+| `read.int(bitCount)`  | Read signed integer         | `buffer.read.int(16)`    |
+| `read.uint(bitCount)` | Read unsigned integer       | `buffer.read.uint(16)`   |
 
-| Method                                       | Description                          |
-| -------------------------------------------- | ------------------------------------ |
-| `readBits(bitCount: number)`                 | Read up to 32 bits                   |
-| `writeBits(value: number, bitCount: number)` | Write up to 32 bits                  |
-| `readBytes(count: number)`                   | Read multiple bytes                  |
-| `writeBytes(bytes: Uint8Array \| Buffer)`    | Write multiple bytes                 |
-| `peek(bitCount: number)`                     | Read bits without advancing position |
-| `seek(position: number)`                     | Move to specific bit position        |
-| `mark(name?: string)`                        | Mark current position                |
-| `reset(name?: string)`                       | Return to marked position            |
-| `alignToByte()`                              | Align to next byte boundary          |
-| `getBuffer()`                                | Get buffer contents                  |
-| `clear()`                                    | Reset buffer state                   |
+### Writing Operations
+
+| Method                        | Description                  | Example                         |
+| ----------------------------- | ---------------------------- | ------------------------------- |
+| `write.bits(value, count)`    | Write 1-32 bits              | `buffer.write.bits(42, 7)`      |
+| `write.bytes(data)`           | Write byte array             | `buffer.write.bytes(bytes)`     |
+| `write.string(str)`           | Write string                 | `buffer.write.string("hello")`  |
+| `write.cString(str)`          | Write null-terminated string | `buffer.write.cString("hello")` |
+| `write.int(value, bitCount)`  | Write signed integer         | `buffer.write.int(-42, 16)`     |
+| `write.uint(value, bitCount)` | Write unsigned integer       | `buffer.write.uint(42, 16)`     |
+
+### Buffer Management
+
+| Method           | Description               |
+| ---------------- | ------------------------- |
+| `seek(position)` | Move to byte position     |
+| `skip(bytes)`    | Skip ahead bytes          |
+| `mark(name?)`    | Mark current position     |
+| `reset(name?)`   | Return to marked position |
+| `alignToByte()`  | Align to byte boundary    |
+| `clear()`        | Reset buffer state        |
+| `getBuffer()`    | Get underlying buffer     |
+| `isComplete()`   | Check if all data read    |
+
+## Common Use Cases
+
+- Binary file format parsing/writing
+- Network protocol implementation
+- Data compression/decompression
+- Game state serialization
+- Embedded systems communication
+
+## Error Handling
+
+BitPackedBuffer includes comprehensive error checking:
+
+```javascript
+try {
+  buffer.read.bits(33); // Throws RangeError
+} catch (error) {
+  console.error("Invalid bit count:", error.message);
+}
+```
+
+## Performance Considerations
+
+- Align to byte boundaries when possible for better performance
+- Use `mark()`/`reset()` for temporary position changes
+- Pre-allocate buffers when size is known
+- Use the appropriate endianness for your data format
 
 ## Contributing
 
 Contributions are welcome! Here's how you can help:
 
 1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
+2. Create a feature branch: `git checkout -b feature/amazing-feature`
+3. Make your changes and commit: `git commit -m 'Add amazing feature'`
+4. Push to the branch: `git push origin feature/amazing-feature`
 5. Open a Pull Request
+
+Please ensure your PR:
+
+- Includes tests for new functionality
+- Updates documentation as needed
+- Follows the existing code style
+- Includes a clear description of changes
+
+## Support
+
+- 📦 [npm package](https://www.npmjs.com/package/bitpacked)
+- 📘 [GitHub Repository](https://github.com/RedYetiDev/bitpackedbuffer)
+- 🐛 [Issue Tracker](https://github.com/RedYetiDev/bitpackedbuffer/issues)
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Support
-
-- 📦 [NPM Package](https://www.npmjs.com/package/bitpacked)
-- 📖 [GitHub Repository](https://github.com/RedYetiDev/bitpackedbuffer)
-- 🐛 [Issue Tracker](https://github.com/RedYetiDev/bitpackedbuffer/issues)
 
 ---
 
