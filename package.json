@@ -1,0 +1,35 @@
+{
+  "name": "bitpacked",
+  "version": "0.1.0",
+  "description": "A Bit-Packed Buffer",
+  "main": "src/Buffer.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "node --test",
+    "format": "prettier --check \"**/*.{js,jsx,ts,tsx,md,json,yaml,yml}\"",
+    "format:fix": "prettier --write \"**/*.{js,jsx,ts,tsx,md,json,yaml,yml}\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RedYetiDev/bitpackedbuffer.git"
+  },
+  "keywords": [
+    "Bit",
+    "Packed",
+    "Buffer",
+    "Bit-Packed",
+    "Endian"
+  ],
+  "author": "RedYetiDev",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RedYetiDev/bitpackedbuffer/issues"
+  },
+  "homepage": "https://github.com/RedYetiDev/bitpackedbuffer#readme",
+  "type": "module",
+  "devDependencies": {
+    "prettier": "^3.4.2"
+  }
+}
