@@ -7,7 +7,7 @@ A high-performance JavaScript library for bit-level data manipulation with zero 
 
 ## Overview
 
-BitPackedBuffer provides precise control over bit-level operations in JavaScript, supporting both big-endian and little-endian byte orders. Whether you're implementing a binary protocol, working with compressed data, or handling custom file formats, BitPackedBuffer offers a clean, chainable API for all your bit manipulation needs.
+BitPackedBuffer provides precise control over bit-level operations in JavaScript, supporting both big-endian and little-endian byte orders. Whether you're implementing a binary protocol, working with file formats, or handling low-level data, BitPackedBuffer is designed to meet your needs.
 
 ### Key Features
 
@@ -30,13 +30,13 @@ npm install bitpacked
 
 <!-- prettier-ignore -->
 ```javascript
-import { BitPackedBuffer } from 'bitpacked';
+import { BitPackedBuffer } from "bitpacked";
 
 // Write mixed-width values
 const buffer = new BitPackedBuffer()
   .write.bits(5, 3) // Write value 5 using 3 bits
   .write.bits(10, 4) // Write value 10 using 4 bits
-  .write.string('Hi') // Write a string
+  .write.string("Hi") // Write a string
   .alignToByte(); // Align to byte boundary
 
 // Read them back
@@ -105,6 +105,19 @@ new BitPackedBuffer(
 | `clear()`        | Reset buffer state        |
 | `getBuffer()`    | Get underlying buffer     |
 | `isComplete()`   | Check if all data read    |
+
+### Peeking Operations
+
+Peeking operations don't advance the buffer position. They contain the same methods as `read` but return values without modifying the position.
+
+| Method                | Description                 | Example                  |
+| --------------------- | --------------------------- | ------------------------ |
+| `peek.bits(count)`    | Peek 1-32 bits              | `buffer.peek.bits(5)`    |
+| `peek.bytes(count)`   | Peek multiple bytes         | `buffer.peek.bytes(4)`   |
+| `peek.string(length)` | Peek fixed-length string    | `buffer.peek.string(10)` |
+| `peek.cString()`      | Peek null-terminated string | `buffer.peek.cString()`  |
+| `peek.int(bitCount)`  | Peek signed integer         | `buffer.peek.int(16)`    |
+| `peek.uint(bitCount)` | Peek unsigned integer       | `buffer.peek.uint(16)`   |
 
 ## Common Use Cases
 
