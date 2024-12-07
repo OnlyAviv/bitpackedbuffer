@@ -1,6 +1,6 @@
 {
   "name": "bitpacked",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "A Bit-Packed Buffer",
   "main": "src/buffer.js",
   "directories": {
@@ -11,17 +11,19 @@
     "format": "prettier --check \"**/*.{js,jsx,ts,tsx,md,json,yaml,yml}\"",
     "format:fix": "prettier --write \"**/*.{js,jsx,ts,tsx,md,json,yaml,yml}\""
   },
-  "types": "./src/buffer.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/RedYetiDev/bitpackedbuffer.git"
   },
   "keywords": [
-    "Bit",
-    "Packed",
-    "Buffer",
-    "Bit-Packed",
-    "Endian"
+    "bit",
+    "packed",
+    "buffer",
+    "bitpacked",
+    "binary",
+    "data",
+    "serialization",
+    "endian"
   ],
   "author": "RedYetiDev",
   "license": "MIT",
