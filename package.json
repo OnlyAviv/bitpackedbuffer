@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/OnlyAviv/bitpackedbuffer.git"
+    "url": "git+https://github.com/avivkeller/bitpackedbuffer.git"
   },
   "keywords": [
     "bit",
@@ -28,9 +28,9 @@
   "author": "Aviv Keller",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/OnlyAviv/bitpackedbuffer/issues"
+    "url": "https://github.com/avivkeller/bitpackedbuffer/issues"
   },
-  "homepage": "https://github.com/OnlyAviv/bitpackedbuffer#readme",
+  "homepage": "https://github.com/avivkeller/bitpackedbuffer#readme",
   "type": "module",
   "devDependencies": {
     "prettier": "^3.4.2"
