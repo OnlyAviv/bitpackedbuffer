@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/RedYetiDev/bitpackedbuffer.git"
+    "url": "git+https://github.com/OnlyAviv/bitpackedbuffer.git"
   },
   "keywords": [
     "bit",
@@ -25,12 +25,12 @@
     "serialization",
     "endian"
   ],
-  "author": "RedYetiDev",
+  "author": "Aviv Keller",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/RedYetiDev/bitpackedbuffer/issues"
+    "url": "https://github.com/OnlyAviv/bitpackedbuffer/issues"
   },
-  "homepage": "https://github.com/RedYetiDev/bitpackedbuffer#readme",
+  "homepage": "https://github.com/OnlyAviv/bitpackedbuffer#readme",
   "type": "module",
   "devDependencies": {
     "prettier": "^3.4.2"
