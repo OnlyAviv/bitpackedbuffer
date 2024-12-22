@@ -166,8 +166,8 @@ Please ensure your PR:
 ## Support
 
 - 📦 [npm package](https://www.npmjs.com/package/bitpacked)
-- 📘 [GitHub Repository](https://github.com/RedYetiDev/bitpackedbuffer)
-- 🐛 [Issue Tracker](https://github.com/RedYetiDev/bitpackedbuffer/issues)
+- 📘 [GitHub Repository](https://github.com/OnlyAviv/bitpackedbuffer)
+- 🐛 [Issue Tracker](https://github.com/OnlyAviv/bitpackedbuffer/issues)
 
 ## License
 
@@ -175,4 +175,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-Made with ❤️ by [RedYetiDev](https://github.com/RedYetiDev)
+Made with ❤️ by [Aviv Keller](https://github.com/OnlyAviv)
